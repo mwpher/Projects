@@ -26,8 +26,9 @@
  *-----------------------------------------------------------------------------*/
 static int answer;
 static bool satisfied;
-int add(void);
 
+int add(void);
+int subtract(void);
 
 /*-----------------------------------------------------------------------------
  *  FUNCTION main()
@@ -54,14 +55,14 @@ int main(void)
 				break;
 
 			case 's':	
-				fprintf ( stderr, "Not implemented yet!\n" );
+				answer = subtract();
 				break;
 
 		//	case :	
 		//		break;
 
 			default:
-				printf ( "Not a valid answer!\n" );
+				fprintf ( stderr, "Not a valid answer!\n" );
 				break;
 		}	
 	} while (satisfied != true);
@@ -88,5 +89,28 @@ int add(void)
 	c = a + b;
 	satisfied = true;
 
+	return c;
+}
+
+
+/*-----------------------------------------------------------------------------
+ *  FUNCTION subtract()
+ *-----------------------------------------------------------------------------*/
+int subtract (void)
+{
+	int a;
+	int b;
+	int c;
+	extern bool satisfied;
+
+	printf ( "Let's subtract two integers!\n\n" );
+	printf ( "Give me the first integer: " );
+	a = GetInt();
+	printf ( "Give me the second integer: " );
+	b = GetInt();
+	printf ( "You gave me %i and %i.\n", a, b );
+	c = a - b;
+	satisfied = true;
+	
 	return c;
 }
