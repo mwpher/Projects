@@ -33,25 +33,38 @@ int main (int argc, char *argv[])
 //    if (argc == 0)
 //        prompt()
     
-    if (argc != 4){
+    if (argc != 4 && argc > 1) {
         fprintf(stderr, "%d is not enough arguments!\n", argc);
-        quit("Not enough arguments!");
+        exit(1);
     }
 
     double a, b, c;
     char operator, j;
     errno = 0;
 
+    if (argc == 1 || argc == 0)
+    {
+    printf ( "You didn't enter anything at the command line! Let's fix that.\n" );
+        printf ( "Please enter the first number: " );
+        a = getDouble();
+        printf ( "Please enter the second number: " );
+        b = getDouble();
+        printf ( "Please give me an operator\n( + - x / ): " );
+        operator = getChar();
+    }
+    else
+    {
     a = stringtod(argv[1]); // grab first number
     if (sscanf(argv[2], " %c %c", &operator, &j) != 1) // get operator
         quit ("Couldn't grab operator");
     b = stringtod(argv[3]);
+    }
 
     c = calc(a, b, operator);
     if (__isfinite(c) == 0)
         quit("It's a NaN!");
     else
-        printf("%g", c);
+        printf("%g %c %g == %g", a, operator, b, c);
 
     return EXIT_SUCCESS;
 }
