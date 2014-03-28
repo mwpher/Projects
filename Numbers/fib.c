@@ -27,15 +27,17 @@ unsigned int bytes_added( int result_of_sprintf );
 
 int main(int argc, char* argv[])
 {
-    if (argc != 2)
+    if (argc != 2) {
         fprintf(stderr, "Expected usage: ./fib 32 (where 32 is desired digits of fibonacci numbers)");
+        exit(EXIT_FAILURE);
+    }
     
     unsigned int len = (unsigned int)stringtoint(argv[1]); --len;
     if (len < 3)
         fprintf(stderr, "Need at least 3 digits!");
 
     char* f = fib(len);
-    printf("%s", f);
+    printf("%s\n", f);
 
     return EXIT_SUCCESS;
 }
@@ -61,7 +63,7 @@ char* fib(unsigned int n)
         addlen = bytes_added(snprintf(NULL, 0, "%llu, ", f[i]));
         while (strlen(answer) + addlen > (smem / sizeof(char))) {
             smem = smem * 2;
-            answer = realloc(answer, smem);
+            answer = realloc(answer, smem * sizeof(char));
         }
 
         slen += bytes_added(snprintf(answer + slen, addlen + 1, "%llu, ", f[i]));
