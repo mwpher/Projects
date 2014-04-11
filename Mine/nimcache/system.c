@@ -3,7 +3,7 @@
 /* The generated code is subject to the original license. */
 /* Compiled for: FreeBSD, i386, clang */
 /* Command for C compiler:
-   clang -c  -w  -I/usr/local/lib/nimrod -o usr/home/matt/MyProjects/Challenges-Nimrod/Mine/nimcache/system.o usr/home/matt/MyProjects/Challenges-Nimrod/Mine/nimcache/system.c */
+   clang -c  -w  -I/usr/local/lib/nimrod -o /usr/home/matt/MyProjects/Challenges-Nimrod/Mine/nimcache/system.o /usr/home/matt/MyProjects/Challenges-Nimrod/Mine/nimcache/system.c */
 #define NIM_INTBITS 32
 #include "nimbase.h"
 
