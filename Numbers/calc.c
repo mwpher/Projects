@@ -44,7 +44,7 @@ int main (int argc, char *argv[])
 
     if (argc == 1 || argc == 0)
     {
-    printf ( "You didn't enter anything at the command line! Let's fix that.\n" );
+        printf ( "You didn't enter anything at the command line! Let's fix that.\n" );
         printf ( "Please enter the first number: " );
         a = getDouble();
         printf ( "Please enter the second number: " );
@@ -54,10 +54,10 @@ int main (int argc, char *argv[])
     }
     else
     {
-    a = stringtod(argv[1]); // grab first number
-    if (sscanf(argv[2], " %c %c", &operator, &j) != 1) // get operator
+        a = stringtod(argv[1]); // grab first number
+        if (sscanf(argv[2], " %c %c", &operator, &j) != 1) // get operator
         quit ("Couldn't grab operator");
-    b = stringtod(argv[3]);
+        b = stringtod(argv[3]);
     }
 
     c = calc(a, b, operator);
