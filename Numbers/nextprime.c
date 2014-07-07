@@ -27,35 +27,85 @@
 long isprime(long num);
 
 int main (int argc, char *argv[]) {
-    long prime = 3, factor = 0;
-    int n = 2;
+    long prime = 2, factor = 0;
+    int n = 1;
+    errno = 0;
 
-    if (argc > 1) {
-        fprintf(stderr, "You don't need any arguments; ignoring.\n");
+    if (argc == 2) {
+            int iterations;
+            iterations = stringtoint(argv[1]);
+            if (errno != 0) {
+                fprintf(stderr, "Error in stringtoint: ");
+                ERROR; exit(1);
+            }
+            iterations++;
+            for (n = 1; n < iterations; n++) {
+                factor = isprime(prime);
+                while (factor != 0) {
+                    fprintf(stderr, "%ld is not prime! (found factor in %ld)\n", prime, factor);
+                    prime++;
+                    factor = isprime(prime);
+                }
+                printf("Prime #%d: %ld\n", n, prime);
+                prime++;
+            }
     }
-    printf("Prime #1: 2\n");
-    
-    while (true) {
-        factor = isprime(prime);
-        while (factor != 0) {
-            fprintf(stderr, "%ld is not prime! (found factor in %ld)\n", prime, factor);
-            prime++;
+    else if (argc == 3) {
+        FILE *fp;                       /* output-file pointer */
+        char *fp_file_name = argv[2];   /* output-file name    */
+        int iterations;
+
+        fp	= fopen(fp_file_name, "w"); /* open output file    */
+        if (fp == NULL) {
+            fprintf (stderr, "couldn't open file '%s'; %s\n",
+                    fp_file_name, strerror(errno));
+            exit (EXIT_FAILURE);
+        }
+
+        iterations = stringtoint(argv[1]);
+        if (errno != 0) {
+            fprintf(stderr, "Error in stringtoint: ");
+            ERROR; fclose(fp); exit(1);
+        }
+        iterations++;
+        for (n = 1; n < iterations; n++) {
             factor = isprime(prime);
+            while (factor != 0) {
+                fprintf(fp, "# %ld / %ld\n", prime, factor);
+                prime++;
+                factor = isprime(prime);
+            }
+            fprintf(fp, "%d: %ld\n", n, prime);
+            prime++;
         }
-        printf("Prime %d: %ld\n", n, prime);
-        printf("Continue? (y/n) ");
-        char c;
-        switch(c = getChar()) {
-            case 'n':
-            case 'N':
-                exit(0);
-            case 'y':
-            case 'Y':
-                break;
+        if (fclose(fp) == EOF) {		/* close output file   */
+            fprintf (stderr, "couldn't close file '%s'; %s\n",
+                fp_file_name, strerror(errno));
+            exit (EXIT_FAILURE);
         }
-        prime++;
     }
-    
+    else {
+        do {
+            factor = isprime(prime);
+            while (factor != 0) {
+                fprintf(stderr, "%ld is not prime! (found factor in %ld)\n", prime, factor);
+                prime++;
+                factor = isprime(prime);
+            }
+            printf("Prime #%d: %ld\n", n, prime);
+            printf("Continue? (y/n) ");
+            char c;
+            switch(c = getChar()) {
+                case 'n':
+                case 'N':
+                    exit(0);
+                case 'y':
+                case 'Y':
+                    break;
+            }
+            prime++; n++;
+        } while (true);
+    }
 }
 
 long isprime(long num) {
@@ -67,3 +117,4 @@ long isprime(long num) {
     }
     return 0;
 }
+
