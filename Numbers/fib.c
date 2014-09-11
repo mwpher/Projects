@@ -3,7 +3,7 @@
  *
  *       Filename:  fib3.c
  *
- *    Description:  
+ *    Description:  Outputs fibonacci numbers.
  *
  *        Version:  0.1
  *        Created:  03/20/14 10:31:08
