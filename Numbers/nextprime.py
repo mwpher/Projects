@@ -30,7 +30,7 @@ elif len(sys.argv) == 2:
 elif len(sys.argv) == 3:
 	n, fname = int(sys.argv[1]), sys.argv[2]
 else:
-	print "BUH?!"
+	print "Too many arguments!"
 
 def nextprime():
 	"""
