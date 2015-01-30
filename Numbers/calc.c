@@ -25,7 +25,7 @@
 #include <ctype.h>
 #include <matt.h>
 
-void quit(char * message) __attribute__((noreturn));
+void quit(const char message[]) __attribute__((noreturn));
 inline double calc(double first, double second, char operator);
 
 int main (int argc, char *argv[])
@@ -69,7 +69,7 @@ int main (int argc, char *argv[])
     return EXIT_SUCCESS;
 }
 
-void quit(char * message)
+void quit(const char message[])
 {
     fprintf(stderr, "%s", message);
     exit(1);
