@@ -56,7 +56,7 @@ int main (int argc, char *argv[])
     {
         a = stringtod(argv[1]); // grab first number
         if (sscanf(argv[2], " %c %c", &operator, &j) != 1) // get operator
-        quit ("Couldn't grab operator");
+            quit ("Couldn't grab operator");
         b = stringtod(argv[3]);
     }
 
