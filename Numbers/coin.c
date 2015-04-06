@@ -32,7 +32,6 @@ int main(int argc, const char *argv[]) {
     }
 
     unsigned int flips;
-    const unsigned int half = UINT_MAX / 2;
     const char* errstr;
     unsigned int i;
 
@@ -43,17 +42,17 @@ int main(int argc, const char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    unsigned int myRandomData[flips];
+    bool myRandomData[flips];
     arc4random_buf(myRandomData, sizeof myRandomData);
 
     for (i = 0; i < flips; i++) {
-        if (myRandomData[i] > half) {
+        if (myRandomData[i] == true) {
             printf("Heads! ");
         }
         else {
             printf("Tails! ");
         }
-        printf(" %u / %u \r\n", myRandomData[i], half);
+        printf(" %u \r\n", myRandomData[i]);
     }
 
     return EXIT_SUCCESS;
